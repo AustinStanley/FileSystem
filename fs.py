@@ -17,7 +17,8 @@ class FileSystem:
         self.formatted = False
 
     def fmt(self, n_names, n_abpt):
-        '''Create FNT and ABPT
+        '''
+        Create FNT and ABPT
         Mark their blocks used 
         '''
 
@@ -66,7 +67,8 @@ class FileSystem:
             print('Error: must format before saving.')
 
     def remove(self, name):
-        '''Decrement reference count in ABPT
+        '''
+        Decrement reference count in ABPT
         Reclaim blocks
         Delete the directory entry
         '''
@@ -81,7 +83,8 @@ class FileSystem:
         self.fnt.delete(name)
 
     def put(self, extern_file):
-        '''Read in binary data from extern_file
+        '''
+        Read in binary data from extern_file
         write to first available block(s) on disk
         '''
         #import pdb; pdb.set_trace()
@@ -129,7 +132,8 @@ class FileSystem:
             self.n_files += 1
 
     def get(self, fname):
-        '''Look up fname in FNT
+        '''
+        Look up fname in FNT
         Locate on disk via ABPT
         Write data to file in CWD 
         '''
@@ -143,15 +147,15 @@ class FileSystem:
         f.close()
 
     def link(self, new, existing):
-        '''Add FNT entry which
+        '''
+        Add FNT entry which
         points to an existing ABP
         '''
         self.fnt.addfile(new, self.fnt.get_abp(existing))
         self.abpt.inc_ref(self.fnt.get_abp(existing))
 
     def unlink(self, link):
-        '''Remove FNT link entry
-        '''
+        '''Remove FNT link entry'''
 
         self.remove(link)
 
